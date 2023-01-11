@@ -88,5 +88,89 @@ var finances = [
 ];
 
 // add header to console
-console.log('Financial Analysis');
-console.log('_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-');
+console.log(`Financial Analysis`);
+console.log(`_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-`);
+
+// create a variable to store the number of months
+var numOfMonths = 0;
+
+// use a for loop to iterate through the array
+for (var i = 0; i < finances.length; i++) {
+  numOfMonths++;
+}
+
+// display the total number of months in the console
+console.log(`Total number of Months: ${numOfMonths}`);
+
+// create a variable to keep track of profit and losses
+var total = 0;
+
+// Iterate through the finances array
+for (var i = 0; i < finances.length; i++) {
+  // then add the current month's profit and losses to the total
+  total += finances[i][1];
+}
+
+// The total amount of profit and losses is now stored in the total variable
+console.log(`Total:$${total}`);
+
+// create a variable to track the total change in profit and losses
+var totalChange = 0;
+
+// Iterate through the finances array
+for (var i = 0; i < finances.length; i++) {
+  //! if its not the first month, Calculate the change in profit and losses from the previous month
+  if (i > 0) {
+    var change = finances[i][1] - finances[i - 1][1];
+    totalChange += change;
+  }
+}
+
+// Calculate the average change in profit and losses
+var avgChange = totalChange / (finances.length - 1);
+
+// average change in profit and losses to two decimal points
+console.log(`Average Change: $${avgChange.toFixed(2)}`);
+
+//create variables to track the greatest increase in profit
+var greatestIncrease = 0;
+// create an empty variable to be updated with the greatest increase
+var greatestIncreaseDate = '';
+
+// Iterate through the finances array
+for (var i = 0; i < finances.length; i++) {
+  // !if not the first month Calculate the change in profit and losses from the previous month
+  if (i > 0) {
+    var change = finances[i][1] - finances[i - 1][1];
+
+    // Update the greatest increase in profits if necessary
+    if (change > greatestIncrease) {
+      greatestIncrease = change;
+      greatestIncreaseDate = finances[i][0];
+    }
+  }
+}
+
+// Create variables to track the greatest decrease in losses
+var greatestDec = 0;
+var greatestDecDate = '';
+
+// Iterate through the finances array
+for (var i = 0; i < finances.length; i++) {
+  // if not the first month Calculate the change in profit and losses from the previous month
+  if (i > 0) {
+    var change = finances[i][1] - finances[i - 1][1];
+
+    // Update the greatest decrease in losses if necessary
+    if (change < greatestDec) {
+      greatestDec = change;
+      greatestDecDate = finances[i][0];
+    }
+  }
+}
+console.log(`_____________________________________________________`);
+
+console.log(
+  `Greatest Increase in Profits: ${greatestIncreaseDate} $${greatestIncrease}`
+);
+console.log(`Greatest Decrease in Losses: ${greatestDecDate} $${greatestDec}`);
